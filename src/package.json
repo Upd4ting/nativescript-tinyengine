@@ -1,7 +1,7 @@
 {
 	"name": "nativescript-tinyengine",
 	"version": "1.0.0",
-	"description": "Your awesome NativeScript plugin.",
+	"description": "A little 2d engine.",
 	"main": "tinyengine",
 	"typings": "index.d.ts",
 	"nativescript": {
@@ -36,8 +36,8 @@
 		"iOS"
 	],
 	"author": {
-		"name": "Your Name",
-		"email": "youremail@yourdomain.com"
+		"name": "Upd4ting",
+		"email": "upd4ting@gmail.com"
 	},
 	"bugs": {
 		"url": "https://github.com/Upd4ting/nativescript-tinyengine/issues"
