@@ -45,14 +45,15 @@ export class CollideComponent implements Component {
     }
 
     public onUpdate(entity: Entity): void {
+        entity.setRotation(entity.getRotation() + 3);
     }
 
     public onCollide(collider: Entity, collided: Entity) {
-        // collided.getVelocity().setX(collider.getVelocity().getX());
-        // collided.getVelocity().setY(collider.getVelocity().getY());
+        collided.getVelocity().setX(collider.getVelocity().getX());
+        collided.getVelocity().setY(collider.getVelocity().getY());
 
-        // collider.getVelocity().setX(-collider.getVelocity().getX());
-        // collider.getVelocity().setY(-collider.getVelocity().getY());
+        collider.getVelocity().setX(-collider.getVelocity().getX());
+        collider.getVelocity().setY(-collider.getVelocity().getY());
     }
 
     public onDestroy(entity: Entity): void {

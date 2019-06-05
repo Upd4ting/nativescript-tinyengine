@@ -4,6 +4,7 @@ export declare class World {
     private container;
     private width;
     private height;
+    private gravity;
     private entities;
     private inputHandler;
     private previous;
@@ -11,6 +12,8 @@ export declare class World {
     getContainer(): LayoutBase;
     getWidth(): number;
     getHeight(): number;
+    getGravity(): Vector2;
+    setGravity(gravity: Vector2): void;
     destroy(): void;
     addEntity(entity: Entity): void;
     removeEntity(entity: Entity): void;

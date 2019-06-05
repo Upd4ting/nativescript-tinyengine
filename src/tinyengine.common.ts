@@ -12,16 +12,16 @@ export class World {
     private container: LayoutBase;
     private width: number;
     private height: number;
+    private gravity: Vector2;
     private entities: Entity[];
-    private inputHandler: Function;
     private previous: number;
 
     public constructor(container: LayoutBase, width: number, height: number) {
         this.container = container;
         this.width = width;
         this.height = height;
+        this.gravity = new Vector2(0, 0);
         this.entities = [];
-        this.inputHandler = null;
     }
 
     // Getter & setter
@@ -36,6 +36,14 @@ export class World {
 
     public getHeight(): number {
         return this.height;
+    }
+
+    public getGravity(): Vector2 {
+        return this.gravity;
+    }
+
+    public setGravity(gravity: Vector2): void {
+        this.gravity = gravity;
     }
 
     // Functions
@@ -64,11 +72,6 @@ export class World {
 
         let current: number = new Date().getTime();
         let elapsed: number = current - this.previous;
-
-        // Handle input
-        if (this.inputHandler) {
-            this.inputHandler(this);
-        }
 
         // Update
         this.update(elapsed);
@@ -241,7 +244,7 @@ export class Entity {
         let savedPos = this.position.copy();
 
         // Update position & obb
-        this.position.add(this.velocity.copy().multiply(deltaTime, deltaTime));
+        this.position.add(this.velocity.copy().multiply(deltaTime, deltaTime)).add(this.getWorld().getGravity().copy().multiply(deltaTime, deltaTime));
         this.obb.update(this.position.getX(), this.position.getY(), this.position.getX() + this.shape.getWidth(), this.position.getY() + this.shape.getHeight(), this.rotation);
 
         this.checkForCollision(savedPos);
