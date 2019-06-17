@@ -72,7 +72,8 @@ export function onNavigatingTo(args: NavigatedData) {
 
     let container: LayoutBase = page.getViewById("container");
 
-    let world: World = new World(container, 300, 300);
+	let world: World = new World(container, 300, 300);
+	world.setGravity(new Vector2(0, 0.1));
 
     let cubeEntity: Entity = new Entity(new Vector2(0, 50), new Vector2(0.1, 0), 45, new CubeShape(20, 20, '#FFFFFF'));
     cubeEntity.addComponent(SnakePositionComponent);
@@ -81,7 +82,8 @@ export function onNavigatingTo(args: NavigatedData) {
 
     let wallEntity: Entity = new Entity(new Vector2(240, 10), new Vector2(0, 0), 0, new CubeShape(20, 80, '#DDDDDD'));
     wallEntity.setCollisionResponse(CollisionResponse.COLLIDE);
-    wallEntity.addComponent(SnakePositionComponent);
+	wallEntity.addComponent(SnakePositionComponent);
+	wallEntity.setUseGravity(false);
     world.addEntity(wallEntity);
 
     setInterval(function () { world.tick(); }, 20);

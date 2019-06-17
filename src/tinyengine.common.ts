@@ -120,12 +120,13 @@ export class Entity {
     private id: number;
     private world: World;
     private position: Vector2;
-    private velocity: Vector2;
+	private velocity: Vector2;
     private rotation: number;
     private shape: Shape;
     private obb: OBB;
     private cr: CollisionResponse;
-    private components: Component[];
+	private components: Component[];
+	private useGravity: boolean;
     private started: boolean;
 
     public constructor(position: Vector2, velocity: Vector2, rotation: number, shape: Shape) {
@@ -136,7 +137,8 @@ export class Entity {
         this.shape = shape;
         this.obb = new OBB(position.getX(), position.getY(), position.getX() + shape.getWidth(), position.getY() + shape.getHeight(), rotation);
         this.cr = CollisionResponse.NONE;
-        this.components = [];
+		this.components = [];
+		this.useGravity = true;
         this.started = false;
     }
 
@@ -172,7 +174,11 @@ export class Entity {
 
     public getCollisionResponse(): CollisionResponse {
         return this.cr;
-    }
+	}
+	
+	public isUsingGravity(): boolean {
+		return this.useGravity;
+	}
 
     public setPosition(position: Vector2): void {
         this.position = position;
@@ -200,7 +206,11 @@ export class Entity {
 
     public setCollisionResponse(cr: CollisionResponse): void {
         this.cr = cr;
-    }
+	}
+	
+	public setUseGravity(useGravity: boolean): void {
+		this.useGravity = useGravity;
+	}
 
     // Functions
 
@@ -244,7 +254,10 @@ export class Entity {
         let savedPos = this.position.copy();
 
         // Update position & obb
-        this.position.add(this.velocity.copy().multiply(deltaTime, deltaTime)).add(this.getWorld().getGravity().copy().multiply(deltaTime, deltaTime));
+		this.position.add(this.velocity.copy().multiply(deltaTime, deltaTime));
+		if (this.useGravity) {
+			this.position.add(this.getWorld().getGravity().copy().multiply(deltaTime, deltaTime));
+		}
         this.obb.update(this.position.getX(), this.position.getY(), this.position.getX() + this.shape.getWidth(), this.position.getY() + this.shape.getHeight(), this.rotation);
 
         this.checkForCollision(savedPos);

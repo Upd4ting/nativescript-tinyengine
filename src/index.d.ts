@@ -6,7 +6,6 @@ export declare class World {
     private height;
     private gravity;
     private entities;
-    private inputHandler;
     private previous;
     constructor(container: LayoutBase, width: number, height: number);
     getContainer(): LayoutBase;
@@ -33,6 +32,7 @@ export declare class Entity {
     private obb;
     private cr;
     private components;
+    private useGravity;
     private started;
     constructor(position: Vector2, velocity: Vector2, rotation: number, shape: Shape);
     getID(): number;
@@ -43,6 +43,7 @@ export declare class Entity {
     getShape(): Shape;
     getOBB(): OBB;
     getCollisionResponse(): CollisionResponse;
+    isUsingGravity(): boolean;
     setPosition(position: Vector2): void;
     setVelocity(velocity: Vector2): void;
     setRotation(rotation: number): void;
@@ -50,6 +51,7 @@ export declare class Entity {
     setShape(shape: Shape): void;
     setOBB(obb: OBB): void;
     setCollisionResponse(cr: CollisionResponse): void;
+    setUseGravity(useGravity: boolean): void;
     addComponent<T extends Component>(type: (new () => T)): T;
     removeComponent(className: string): void;
     update(deltaTime: number): void;
