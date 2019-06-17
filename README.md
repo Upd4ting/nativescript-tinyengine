@@ -46,8 +46,6 @@ setInterval(function () { world.tick(); }, 20);
 ## Documentation
 
 
-
-### World class
     
 ## License
 
