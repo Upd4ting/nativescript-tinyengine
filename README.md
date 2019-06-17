@@ -45,7 +45,7 @@ setInterval(function () { world.tick(); }, 20);
 
 ## Documentation
 
-
+You can find the documentation of the library [here](https://upd4ting.github.io/nativescript-tinyengine/)
     
 ## License
 
