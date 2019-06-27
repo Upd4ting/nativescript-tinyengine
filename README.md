@@ -46,6 +46,20 @@ setInterval(function () { world.tick(); }, 20);
 ## Documentation
 
 You can find the documentation of the library [here](https://upd4ting.github.io/nativescript-tinyengine/)
+
+## Components / Collisions
+
+`Component` is an interface that you can implements. This interface has the following methods: 
+
+-	`onStart(entity: Entity)` Called before the first frame update of the attached entity.
+-	`onUpdate(entity: Entity, deltatTime: number)` Called at each frame update of the attached entity.
+-	`onCollide(collider: Entity, collided: Entity)` Called when the attached entity collide with an other entity.
+-	`onDestroy(entity: Entity)` Called when the attached entity is destroyed.
+-	`getClassName(): string` You need to return your class name in this method.
+
+Components can be attached throught the `addComponent<T extends Component>(type: (new () => T))` of the Entity class.
+
+Each entity got a property `collisionResponse` which can be set to `NONE` or `COLLIDE`. That's how are handled collision. If you want to have something custom, put the collision response to `NONE` and do your custom logic into `onCollide(collider: Entity, collided: Entity)` of a component.
     
 ## License
 
