@@ -1,6 +1,6 @@
 {
 	"name": "nativescript-tinyengine",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"description": "A little 2d engine.",
 	"main": "tinyengine",
 	"typings": "index.d.ts",
